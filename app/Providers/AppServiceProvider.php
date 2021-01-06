@@ -11,8 +11,9 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        dump('somewhere in vendor');
         Model::unguard();
-
+dump(app());
         Gate::define('viewMailcoach', function ($user = null) {
             return optional($user)->is_admin;
         });

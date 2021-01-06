@@ -13,7 +13,13 @@ class ProductsController
             ->where('visible', true)
             ->get();
 
-        return view('front.pages.products.index', compact('products'));
+        dump('I AM HERE');
+        dump($products);
+
+        return view(
+            'front.pages.products.index',
+            compact('products')
+        );
     }
 
     public function show(Request $request, Product $product)

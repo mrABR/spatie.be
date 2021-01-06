@@ -13,7 +13,6 @@
             </p>
         </div>
     </section>
-
    {{--
    @include('front.pages.products.partials.ctaBlackFriday')
    --}}
@@ -21,7 +20,9 @@
     <section class="section overflow-visible section-group">
             <div class="wrap">
                 <div class="grid col-gap-6 row-gap-16 | sm:grid-cols-2 items-stretch">
-                    @foreach ($products as $product)
+         @php('I AM HERE')           @foreach ($products as $product)
+                        @php(dump($product))
+
                         <div class="line-l line-l-green p-4 bg-green-lightest bg-opacity-50">
                             <a href="{{ route('products.show', $product) }}">
                                 <div class="-mt-8 pb-8 px-12">

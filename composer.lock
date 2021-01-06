@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a55897a6d9627149eaa3d94835769db3",
+    "content-hash": "62bc2250151a4bb1b54310c42c675fb5",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -9131,6 +9131,68 @@
             "time": "2020-09-28T06:39:44+00:00"
         },
         {
+            "name": "spatie/backtrace",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/backtrace.git",
+                "reference": "59811ee52b21b5a42a9c6ca8699f979fd64d8cec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/backtrace/zipball/59811ee52b21b5a42a9c6ca8699f979fd64d8cec",
+                "reference": "59811ee52b21b5a42a9c6ca8699f979fd64d8cec",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "phpunit/phpunit": "^9.3",
+                "symfony/var-dumper": "^5.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Backtrace\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van de Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A better backtrace",
+            "homepage": "https://github.com/spatie/backtrace",
+            "keywords": [
+                "Backtrace",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/backtrace/issues",
+                "source": "https://github.com/spatie/backtrace/tree/1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/spatie",
+                    "type": "github"
+                },
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "other"
+                }
+            ],
+            "time": "2020-11-24T11:46:24+00:00"
+        },
+        {
             "name": "spatie/commonmark-highlighter",
             "version": "2.1.1",
             "source": {
@@ -10514,6 +10576,101 @@
             "time": "2020-11-27T09:36:55+00:00"
         },
         {
+            "name": "spatie/laravel-ray",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:spatie/laravel-ray.git",
+                "reference": "0f53b57c508db323264baeb407a700bb0a3fbd7b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://satis.spatie.be/dist/spatie/laravel-ray/spatie-laravel-ray-0f53b57c508db323264baeb407a700bb0a3fbd7b-zip-61722e.zip",
+                "reference": "0f53b57c508db323264baeb407a700bb0a3fbd7b",
+                "shasum": "b8fd9247507895cd205d1997dc17e271999b9873"
+            },
+            "require": {
+                "illuminate/contracts": "^7.0|^8.0",
+                "illuminate/database": "^7.0|^8.13",
+                "illuminate/support": "^7.0|^8.13",
+                "php": "^7.4|^8.0",
+                "spatie/backtrace": "^1.0",
+                "spatie/ray": "dev-master",
+                "symfony/stopwatch": "4.2|^5.2"
+            },
+            "require-dev": {
+                "illuminate/mail": "^7.0|^8.19",
+                "illuminate/view": "^7.0|^8.19",
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^9.3",
+                "spatie/phpunit-snapshot-assertions": "^4.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\LaravelRay\\RayServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelRay\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Spatie\\LaravelRay\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "psalm": [
+                    "vendor/bin/psalm"
+                ],
+                "test": [
+                    "vendor/bin/phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ],
+                "format": [
+                    "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily debug Laravel apps",
+            "homepage": "https://github.com/spatie/laravel-ray",
+            "keywords": [
+                "laravel-ray",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/laravel-ray/tree/master",
+                "issues": "https://github.com/spatie/laravel-ray/issues"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/sponsors/spatie"
+                },
+                {
+                    "type": "other",
+                    "url": "https://spatie.be/open-source/support-us"
+                }
+            ],
+            "time": "2021-01-05T18:22:56+00:00"
+        },
+        {
             "name": "spatie/laravel-schedule-monitor",
             "version": "2.1.0",
             "source": {
@@ -11367,6 +11524,97 @@
                 }
             ],
             "time": "2020-11-30T16:09:27+00:00"
+        },
+        {
+            "name": "spatie/ray",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:spatie/ray.git",
+                "reference": "6e1d79b566d8c5f0f9cee6f2f196ff119079c8ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://satis.spatie.be/dist/spatie/ray/spatie-ray-6e1d79b566d8c5f0f9cee6f2f196ff119079c8ee-zip-8ca7b4.zip",
+                "reference": "6e1d79b566d8c5f0f9cee6f2f196ff119079c8ee",
+                "shasum": "5caa974b685ea640871d22bce32372d8f8235457"
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": "^7.4|^8.0",
+                "ramsey/uuid": "^4.1",
+                "spatie/backtrace": "^1.0",
+                "spatie/macroable": "^1.0",
+                "symfony/console": "^4.2|^5.2",
+                "symfony/stopwatch": "^4.2|^5.2",
+                "symfony/var-dumper": "^4.2|^5.2"
+            },
+            "require-dev": {
+                "illuminate/support": "^8.18",
+                "phpunit/phpunit": "^9.5",
+                "spatie/phpunit-snapshot-assertions": "^4.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Ray\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Spatie\\Ray\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "psalm": [
+                    "vendor/bin/psalm"
+                ],
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ],
+                "format": [
+                    "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The PHP client",
+            "homepage": "https://github.com/spatie/ray",
+            "keywords": [
+                "ray",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/ray/tree/master",
+                "issues": "https://github.com/spatie/ray/issues"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/sponsors/spatie"
+                },
+                {
+                    "type": "other",
+                    "url": "https://spatie.be/open-source/support-us"
+                }
+            ],
+            "time": "2021-01-06T17:20:12+00:00"
         },
         {
             "name": "spatie/schema-org",
@@ -14482,6 +14730,68 @@
             "time": "2020-09-07T11:33:47+00:00"
         },
         {
+            "name": "symfony/stopwatch",
+            "version": "v5.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/stopwatch.git",
+                "reference": "2b105c0354f39a63038a1d8bf776ee92852813af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/2b105c0354f39a63038a1d8bf776ee92852813af",
+                "reference": "2b105c0354f39a63038a1d8bf776ee92852813af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/service-contracts": "^1.0|^2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Stopwatch\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Stopwatch Component",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/stopwatch/tree/v5.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-11-01T16:14:45+00:00"
+        },
+        {
             "name": "symfony/string",
             "version": "v5.2.1",
             "source": {
@@ -16367,7 +16677,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "knplabs/github-api": 20
+        "knplabs/github-api": 20,
+        "spatie/laravel-ray": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

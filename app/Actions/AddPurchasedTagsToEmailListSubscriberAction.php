@@ -12,6 +12,8 @@ class AddPurchasedTagsToEmailListSubscriberAction
 {
     public function execute(Purchase $purchase)
     {
+        dump('start of execution');
+        dump($purchase);
         if (empty($purchase->user->email)) {
             return;
         }

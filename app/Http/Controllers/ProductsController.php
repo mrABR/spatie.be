@@ -13,7 +13,6 @@ class ProductsController
             ->where('visible', true)
             ->get();
 
-        dump('I AM HERE');
         dump($products);
 
         return view(

@@ -14,6 +14,7 @@ class AddPurchasedTagsToEmailListSubscriberActionTest extends TestCase
     /** @test */
     public function it_will_add_tags_for_the_purchasable_on_the_mailing_list()
     {
+        dump('starting test');
         /** @var EmailList $emailList */
         $emailList = EmailList::create(['name' => 'Spatie']);
 

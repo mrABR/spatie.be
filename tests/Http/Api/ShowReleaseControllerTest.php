@@ -20,7 +20,7 @@ class ShowReleaseControllerTest extends TestCase
         ]);
     }
 
-    /** @test */
+
     public function it_can_show_release_notes_for_a_released_release()
     {
         $response = $this

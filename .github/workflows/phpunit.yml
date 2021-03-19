@@ -9,6 +9,10 @@ jobs:
         steps:
             - uses: actions/checkout@v2
 
+            - uses: webfactory/ssh-agent@v0.5.1
+              with:
+                  ssh-private-key: ${{ secrets.COMPOSER_AUTH }}
+
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
@@ -24,8 +28,7 @@ jobs:
             - name: Run composer install
               run: composer install -n --prefer-dist
               env:
-                COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.COMPOSER_AUTH}}"} }'
-                #COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
+                COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
 
             - name: Prepare Laravel Application
               run: |

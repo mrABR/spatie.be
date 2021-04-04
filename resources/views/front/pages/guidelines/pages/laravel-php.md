@@ -778,9 +778,9 @@ When writing non-resourceful controllers you might come across invokable control
 
 e.g. `PerformCleanupController`
 
-### Resources (and transformers)
+### Resources
 
-Both Eloquent resources and Fractal transformers are both singular or plural resources, depending if its representing a single object or a collection, suffixed with `Resource` or `Transformer` accordingly. This is to avoid naming collisions with models.
+Eloquent resources can be both singular or plural resources, depending if its representing a single object or a collection, suffixed with `Resource`. This is to avoid naming collisions with models.
 
 Work with CollectionResource whenever pagination is included, otherwise use JsonResource
 

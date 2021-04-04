@@ -1,20 +1,10 @@
----
-title: Laravel & PHP
-description: Artisanal baked code
-weight: 1
----
-
-## About Laravel
-
-First and foremost, Laravel provides the most value when you write things the way Laravel intended you to write. If there's a documented way to achieve something, follow it. Whenever you do something differently, make sure you have a justification for *why* you didn't follow the defaults.
-
 ## General PHP Rules
 
 Code style must follow [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/) and [PSR-12](https://www.php-fig.org/psr/psr-12/). Generally speaking, everything string-like that's not public-facing should use camelCase. Detailed examples on these are spread throughout the guide in their relevant sections.
 
 ### Class defaults
 
-By default, we don't use `final`. In our team, there aren't many benefits that `final` offers as we don't rely too much on inheritance. For our open source stuff, we assume that all our users know they are responsible for writing tests for any overwritten behaviour.
+By default, we don't use `final`. In our team, we haven't met any benefits with what `final` offers so far. We assume that all our users know they are responsible for writing tests for any overwritten behaviour.
 
 ### Nullable and union types
 
@@ -49,7 +39,7 @@ public function scopeArchived(Builder $query): void
 
 ## Typed properties
 
-You should type a property whenever possible. Don't use a docblock.
+You should type a property whenever possible for a more strict assembly. 
 
 ```php
 // good
@@ -57,32 +47,16 @@ class Foo
 {
     public string $bar;
 }
-
-// bad
-class Foo
-{
-    /** @var string */
-    public $bar;
-}
 ```
 
 ## Docblocks
 
-Don't use docblocks for methods that can be fully type hinted (unless you need a description).
+Always use docblocks, even when methods that can be fully type hinted.
 
-Only add a description when it provides more context than the method signature itself. Use full sentences for descriptions, including a period at the end.
+Adding a description proves itself valuable when reviewing and revising funcionality without actually checking how the code was written. If there is a need to check the written code, then proper comments within the method and clear variable names will be required.
 
 ```php
 // Good
-class Url
-{
-    public static function fromString(string $url): Url
-    {
-        // ...
-    }
-}
-
-// Bad: The description is redundant, and the method is fully type-hinted.
 class Url
 {
     /**
@@ -92,6 +66,16 @@ class Url
      *
      * @return \Spatie\Url\Url
      */
+    public static function fromString(string $url): Url
+    {
+        // ...
+    }
+}
+
+// Bad
+class Url
+{
+    
     public static function fromString(string $url): Url
     {
         // ...
@@ -119,21 +103,6 @@ Always use fully qualified class names in docblocks.
  */
 ```
 
-Using multiple lines for a docblock, might draw too much attention to it. When possible, docblocks should be written on one line.
-
-```php
-// Good
-
-/** @var string */
-/** @test */
-
-// Bad
-
-/**
- * @test
- */
-```
-
 If a variable has multiple types, the most common occurring type should be first.
 
 ```php
@@ -148,25 +117,28 @@ If a variable has multiple types, the most common occurring type should be first
 
 ## Constructor property promotion
 
-Use constructor property promotion if all properties can be promoted. To make it readable, put each one on a line of its own. Use a comma after the last one.
+Avoid using constructor property promotion. 
 
 ```php
 // Good
+class MyClass {
+    protected string $firstArgument
+    protected string $secondArgument
+
+    public function __construct(string $firstArgument, string $secondArgument)
+    {
+        $this->firstArgument = $firstArgument;
+        $this->secondArgument = $secondArgument;
+    }
+}
+
+
+// Bad
 class MyClass {
     public function __construct(
         protected string $firstArgument,
         protected string $secondArgument,
     ) {}
-}
-
-// Bad
-class MyClass {
-    protected string $secondArgument
-
-    public function __construct(protected string $firstArgument, string $secondArgument)
-    {
-        $this->secondArgument = $secondArgument;
-    }
 }
 ```
 
@@ -213,6 +185,9 @@ Every portion of a ternary expression should be on its own line unless it's a re
 ```php
 // Good
 $name = $isFoo ? 'foo' : 'bar';
+$name = $isFoo 
+    ? 'foo' 
+    : 'bar';
 
 // Bad
 $result = $object instanceof Model ?
@@ -238,7 +213,7 @@ if ($condition) ...
 
 ### Happy path
 
-Generally a function should have its unhappy path first and its happy path last. In most cases this will cause the happy path being in an unindented part of the function which makes it more readable.
+Generally a function should have its unhappy path first and its happy path last.
 
 ```php
 // Good
@@ -354,7 +329,8 @@ if ($conditionA && $conditionB && $conditionC) {
 
 ## Comments
 
-Comments should be avoided as much as possible by writing expressive code. If you do need to use a comment, format it like this:
+Generally, comments should be avoided as much as possible by writing expressive code. If the code can't be read like a book, you need to refactor.
+If you do need to use a comment (happens), format it like this:
 
 ```php
 // There should be a space before a single line comment.
@@ -366,22 +342,9 @@ Comments should be avoided as much as possible by writing expressive code. If yo
  */
 ```
 
-A possible strategy to refactor away a comment is to create a function with name that describes the comment
-
-```php
-// Good
-$this->calculateLoans();
-```
-
-```php
-// Bad
-
-// Start calculating loans
-```
-
 ## Test classes
 
-If you need a specific class for your test cases, you should keep them within the same test file when possible. When you want to reuse test classes throughout tests, it's fine to make a dedicated class instead. Here's an example of internal classes:
+If you need a specific class for your test cases, you should keep them within the same test file when possible. When you want to reuse test classes throughout tests, it's fine to make a dedicated class instead. Test methods can be either camelCase or snake_case in order to provide readability. Here's an example of internal classes:
 
 ```php
 <?php
@@ -594,21 +557,16 @@ Prefer to use the route tuple notation when possible.
 // Good
 Route::get('open-source', [OpenSourceController::class, 'index']);
 
-// Bad
+// Bad/Old 
 Route::get('open-source', 'OpenSourceController@index');
 ```
 
-```html
-<a href="{{ action([\App\Http\Controllers\OpenSourceController::class, 'index']) }}">
-    Open Source
-</a>
-```
-
-Route names must use camelCase.
+Route names must use camelCase or dot notation.
 
 ```php
 // Good
 Route::get('open-source', [OpenSourceController::class, 'index'])->name('openSource');
+Route::get('open-source', [OpenSourceController::class, 'index'])->name('open.source');
 
 // Bad
 Route::get('open-source', [OpenSourceController::class, 'index'])->name('open-source');
@@ -646,21 +604,21 @@ Route::get('/open-source', [OpenSourceController::class, 'index']);
 
 ## Controllers
 
-Controllers that control a resource must use the plural resource name.
+Controllers that control a resource must use the singular resource name.
 
 ```php
-class PostsController
+class PostController
 {
     // ...
 }
 ```
 
-Try to keep controllers simple and stick to the default CRUD keywords (`index`, `create`, `store`, `show`, `edit`, `update`, `destroy`). Extract a new controller if you need other actions.
+Try to keep controllers simple and stick to the default CRUD or BREAD keywords (`index`, `create`, `store`, `show`, `edit`, `update`, `destroy`). Extract a new controller if you need other actions.
 
 In the following example, we could have `PostsController@favorite`, and `PostsController@unfavorite`, or we could extract it to a separate `FavoritePostsController`.
 
 ```php
-class PostsController
+class PostController
 {
     public function create()
     {
@@ -688,7 +646,7 @@ class PostsController
 Here we fall back to default CRUD words, `store` and `destroy`.
 
 ```php
-class FavoritePostsController
+class FavoritePostController
 {
     public function store(Post $post)
     {
@@ -812,9 +770,9 @@ Naming things is often seen as one of the harder things in programming. That's w
 
 ### Controllers
 
-Generally controllers are named by the plural form of their corresponding resource and a `Controller` suffix. This is to avoid naming collisions with models that are often equally named.
+Generally controllers are named by the singular form of their corresponding resource and a `Controller` suffix. 
 
-e.g. `UsersController` or `EventDaysController`
+e.g. `UserController` or `EventDayController`
 
 When writing non-resourceful controllers you might come across invokable controllers that perform a single action. These can be named by the action they perform again suffixed by `Controller`.
 
@@ -822,7 +780,9 @@ e.g. `PerformCleanupController`
 
 ### Resources (and transformers)
 
-Both Eloquent resources and Fractal transformers are plural resources suffixed with `Resource` or `Transformer` accordingly. This is to avoid naming collisions with models.
+Both Eloquent resources and Fractal transformers are both singular or plural resources, depending if its representing a single object or a collection, suffixed with `Resource` or `Transformer` accordingly. This is to avoid naming collisions with models.
+
+Work with CollectionResource whenever pagination is included, otherwise use JsonResource
 
 ### Jobs
 

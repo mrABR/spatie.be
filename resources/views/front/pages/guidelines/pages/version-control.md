@@ -1,50 +1,23 @@
----
-title: Version control
-description: Writing history
-weight: 4
----
-
-All our projects use Git, mostly with a repository hosted on GitHub. Since we're a small team, and most projects have less than three people working on it simultaneously, we have pretty loose Git guidelines since we rarely bump into conflicts.
-
-## Repo naming conventions
-
-If the repo contains the source code of a site its name should be the main naked domain name of that site. It should be lowercased.
-
-- Bad: `https://www.spatie.be`, `www.spatie.be`, `Spatie.be`
-- Good: `spatie.be`
-
-Sites that are hosted on a subdomain may use that subdomain in their name
-
-- Bad: `spatie.be-guidelines`
-- Good: `guidelines.spatie.be`
-
-If the repo concerns something else, for example a package, its name should be kebab-cased.
-
-- Bad: `LaravelBackup`, `Spoon`
-- Good: `laravel-backup`, `spoon`
-
 ## Branches
 
 If you're going to remember one thing in this guide, remember this: **Once a project has gone live, the master branch must always be stable**. It should be safe to deploy the master branch to production at all times. All branches are assumed to be active; stale branches should get cleaned up accordingly.
 
 ### Projects in initial development
 
-Projects that aren't live yet have at least two branches: `master` and `develop`. Avoid committing directly on the master branch, always commit through develop.
+Projects that aren't live yet have at least two branches: `master` and `dev`. Avoid committing directly on the master branch, always commit through dev.
 
-Feature branches are optional, if you'd like to create a feature branch, make sure it's branched from `develop`, not `master`.
+Feature branches are optional, if you'd like to create a feature branch, make sure it's branched from `dev`, not `master`.
 
-### Live projects
-
-Once a project goes live, the `develop` branch gets deleted. All future commits to `master` must be added through a feature branch. In most cases, it's preferred to squash your commits on merge.
+### Branch naming
 
 There's no strict ruling on feature branch names, just make sure it's clear enough to know what they're for. Branches may only contain lowercase letters and hyphens.
 
-- Bad: `feature/mailchimp`, `random-things`, `develop`
-- Good: `feature-mailchimp`, `fix-deliverycosts` or `updates-june-2016`
+- Bad: `updates-june-2016`, `develop`
+- Good: `feature-mailchimp`, `fix-deliverycosts` or `feature/mailchimp`
 
-### Pull requests
+### Merge requests
 
-Merging branches via GitHub pull requests isn't a requirement, but can be useful if:
+Merging branches via Gitlab merge requests is a requirement, can be useful for:
 
 - You want a peer to review your changes
 - You want to ensure your branch can be merged and commits can be squashed via an interface
@@ -52,22 +25,56 @@ Merging branches via GitHub pull requests isn't a requirement, but can be useful
 
 ### Merging and rebasing
 
-Ideally, rebase your branch regularly to reduce the chance of merge conflicts.
+Ideally, rebase your branch from the origin regularly to reduce the chance of merge conflicts.
+This is also helpfull when someone releases content onto the main branch that you may require
 
-- If you want to deploy a feature branch to master, use `git merge <branch> --squash`
-- If your push is denied, rebase your branch first using `git rebase`
+- Rebase your branch using `git rebase <branch-origin>` (if you branched off dev, rebase from dev)
+- If you want to deploy a feature branch to `master` or `dev`, use `git merge <branch>` (`--squash` if you wish to assemble all the commits into one)
 
 ## Commits
 
-There's not strict ruling on commits in projects in initial development, however, descriptive commit messages are recommended. After a project has gone live, descriptive commit messages are required. Always use present tense in commit messages.
+We try to enforce a bit of strict ruling on commits in projects of any nature. 
 
-- Non-descriptive: `wip`, `commit`, `a lot`, `solid`
-- Descriptive: `Update deps`, `Fix vat calculation in delivery costs`
+- Separate subject from body with a blank line
+- Rule of thumb: Limit the subject line to 50 characters (more or less, if you can't summarize then maybe your commit should be smaller)
+- Capitalize the subject line
+- Do not end the subject line with a period
+- Use the imperative mood in the subject line
+- Wrap the body at 72 characters (we can reach up to 100, its for better readability of whoever is reading)
+- Use the body to explain what and why vs. how
+- Leave a task link in the end of the commit
 
-Ideally, prefer granular commits.
+Ideally:
 
-- Acceptable: `Cart fixes`
-- Better: `Fix add to cart button`, `Fix cart count on home`
+```
+Summarize changes in around 50 characters or less
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequences of this
+change? Here's the place to explain them.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded
+   by a single space, with blank lines in between, but conventions
+   vary here
+
+If you use an issue tracker, put references to them at the bottom,
+like this:
+
+Tasks: IDD-313
+https://zlx.atlassian.com/task-id
+```
 
 ## Git Tips
 
@@ -75,27 +82,12 @@ Ideally, prefer granular commits.
 
 If you've made multiple changes but want to split them into more granular commits, use `git add -p`. This will open an interactive session in which you can choose which chunks you want to stage for your commit.
 
-### Moving commits to a new branch
+### Forbidden techniques
 
-First, create your new branch, then revert the current branch, and finally checkout the new branch.
+Only execute when requested by the senior developers and when you are sure that no-one else pushed changes during your commits.
+Other than that, <u><i>never EVER use the force</i></u>
 
-Don't do this to commits that have already been pushed without double checking with your collaborators!
-
-```bash
-git branch my-branch
-git reset --hard HEAD~3 # OR git reset --hard <commit>
-git checkout my-branch
 ```
-
-### Squashing commits already pushed
-
-Only execute when you are sure that no-one else pushed changes during your commits.
-
-First, copy the SHA from the commit previous to your commits that need to be squashed.
-
-```bash
-git reset --soft <commit>
-git commit -m "your new message"
 git push --force
 ```
 
@@ -105,6 +97,4 @@ After a while, you'll end up with a few stale branches in your local repository.
 
 ## Resources
 
-- Most of this is based on the [GitHub Flow](https://guides.github.com/introduction/flow/)
 - Merge vs. rebase on [Atlassian](https://www.atlassian.com/git/tutorials/merging-vs-rebasing/workflow-walkthrough)
-- Merge vs. rebase by [@porteneuve](https://medium.com/@porteneuve/getting-solid-at-git-rebase-vs-merge-4fa1a48c53aa)
